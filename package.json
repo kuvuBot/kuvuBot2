@@ -2,7 +2,7 @@
   "name": "kuvubot",
   "version": "1.0.0",
   "description": "Discord bot written in Node.js.",
-  "main": "kuvuBot.js",
+  "main": "main.js",
   "dependencies": {
     "cleverbot": "^1.0.1",
     "discord.js": "^11.0.0"

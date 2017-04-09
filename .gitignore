@@ -3,6 +3,9 @@ logs
 *.log
 npm-debug.log*
 
+# kuvuBot keys file
+keys.js
+
 # Runtime data
 pids
 *.pid

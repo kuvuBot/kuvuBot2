@@ -1,9 +1,6 @@
 var config = {};
 
-config.keys = {
-    "discord": "DISCORD_BOT_TOKEN",
-    "cleverbot": "CLEVERBOT_API_KEY"
-};
+config.keys = require('./keys.js').keys;
 
 config.settings = {
     'bot_name': 'kuvuBot',

@@ -12,11 +12,15 @@ figlet.send = function (message) {
         if (splitted.length == 1) {
             message.channel.sendMessage(`<@${message.author.id}> ⚠️ **` + lang.pl_PL.valid_usage + `**: \`.figlet <` + lang.pl_PL.commands.help.arguments.text + `>\``);
         } else {
-            figletModule(message.content.replace(splitted[0] + ' ', ''), function(error, data) {
-                if (error) { logger.log(error); return; }
-                message.reply('');
-                message.channel.sendMessage(`\`\`\`${data}\`\`\``);
-            });
+            if (message.content.replace(splitted[0] + ' ', '').length < 33) {
+                figletModule(message.content.replace(splitted[0] + ' ', ''), function(error, data) {
+                    if (error) { logger.log(error); return; }
+                    message.reply('');
+                    message.channel.sendMessage('```' + data + '```');
+                });
+            } else {
+                message.reply(lang.pl_PL.commands.figlet.too_long);
+            }
         }
     } catch (e) {
         message.reply("error!");

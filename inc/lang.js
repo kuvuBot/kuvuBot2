@@ -73,6 +73,15 @@ lang.pl_PL = {
             'status': 'wyświetla status serwerów',
 
             'list_sent': 'lista komend została wysłana na PW!'
+        },
+        'figlet': {
+            'too_long': 'podaj krotszy tekst! (maks. 32 znaki)'
+        },
+        'rawtext': {
+            'too_long': 'podaj krotszy tekst! (maks. 70 znakow)'
+        },
+        'text': {
+            'too_long': 'podaj krotszy tekst! (maks. 150 znakow)'
         }
     },
 

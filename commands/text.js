@@ -27,11 +27,15 @@ text.send = function (message) {
         if (splitted.length == 1) {
             message.channel.sendMessage(`<@${message.author.id}> ⚠️ **` + lang.pl_PL.valid_usage + `**: \`.text <` + lang.pl_PL.commands.help.arguments.text + `>\``);
         } else {
-            for (let i = 1; i < splitted.length; i++) {
-                reply += toEmoji(splitted[i]).join(' ') + '   ';
+            if (message.content.replace(splitted[0] + ' ', '').length <= 150) {
+                for (let i = 1; i < splitted.length; i++) {
+                    reply += toEmoji(splitted[i]).join(' ') + '   ';
+                }
+                message.channel.sendMessage(reply);
+            } else {
+                message.reply(lang.pl_PL.commands.text.too_long);
             }
         }
-        message.channel.sendMessage(reply);
     } catch (e) {
         message.reply("error!");
         logger.log(e);

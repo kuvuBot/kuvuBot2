@@ -17,7 +17,7 @@ function pushRandomCat(type, message) {
         });
         response.on('end', function () {
             let json = JSON.parse(reply);
-            const embed = new Discord.RichEmbed()
+            const embed = new discord.RichEmbed()
                 .setTitle(config.settings.bot_name)
                 .setColor(config.settings.color.pink)
                 .setDescription(lang.pl_PL.commands.cat.description)

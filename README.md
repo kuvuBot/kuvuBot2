@@ -1,4 +1,4 @@
-# kuvuBot v2 (By Inuun)
+# kuvuBot v2 (by Inuun)
 [<img src="https://discordapp.com/api/guilds/257599205693063168/widget.png?style=shield">](https://discord.gg/KbUdeKe)
 ### Informations
 Official Web Site: https://bot.kuvus.pl <br>
@@ -11,7 +11,7 @@ Node.js 6.0.0 or newer is required!
 To install all modules just run `npm install --save` command in bot directory.
 
 ### Running Guide:
-`node kuvuBot.js`
+`node main.js`
 
 ### Creating Discord Bot Account Guide:
 

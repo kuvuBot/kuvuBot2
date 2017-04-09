@@ -13,7 +13,8 @@ lang.pl_PL = {
         'react': '.reaguj',
         'clever': '.clever',
         'cat': '.kot',
-        'status': '.status'
+        'status': '.status',
+        'figlet': '.figlet'
     },
 
     'commands': {

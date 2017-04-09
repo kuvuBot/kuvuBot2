@@ -21,7 +21,8 @@ rawtext.send = function (message) {
                 reply += '   ';
             }
             reply += '```';
-            message.reply(reply);
+            message.reply('');
+            message.channel.sendMessage(reply);
         }
     } catch (e) {
         message.reply("error!");

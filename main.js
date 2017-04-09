@@ -23,13 +23,14 @@ const servers = require('./commands/servers.js');
 const react = require('./commands/react.js');
 const status = require('./commands/status.js');
 const clear = require('./commands/clear.js');
+const figlet = require('./commands/figlet.js');
 
 
 fs.appendFile("bot.log", lmsg + "\n", function (error) {if (error) throw error;});
 
 client.on('ready', () => {
 
-    client.user.setGame('.pomoc');
+    client.user.setGame('PhpStorm 2016.3.2');
     client.user.setAvatar('./resources/avatar.png');
 
     if (running == false) {
@@ -146,6 +147,11 @@ client.on('message', message => {
 
             case '.clear':
                 clear.purge(message);
+                break;
+
+            case '.figlet':
+            case lang.pl_PL.aliases.figlet:
+                figlet.send(message);
                 break;
         }
     }

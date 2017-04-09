@@ -17,6 +17,7 @@ var avatar = {};
 
 avatar.find = function (message, log) {
     try {
+        message.channel.startTyping();
         let users = message.mentions.users;
         if (users.first()) {
             let result = '';
@@ -41,6 +42,8 @@ avatar.find = function (message, log) {
     } catch (e) {
         message.reply("error!");
         console.log(e);
+    } finally {
+        message.channel.stopTyping(true);
     }
 }
 module.exports = avatar;

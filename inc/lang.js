@@ -70,6 +70,7 @@ lang.pl_PL = {
             'react': 'bot reaguje tekstem na wiadomość',
             'clever': 'porozmawiaj z botem!',
             'cat': 'wysyła zdjęcie kotka :3',
+            'figlet': 'zwraca tekst w postaci kresek',
             'status': 'wyświetla status serwerów',
 
             'list_sent': 'lista komend została wysłana na PW!'

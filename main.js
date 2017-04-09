@@ -1,3 +1,6 @@
+let lmsg = "[" + (new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')) + "] Starting kuvuBot2.."; console.log(lmsg);
+let loadstart = new Date();
+
 const discord = require('discord.js');
 const fs = require("fs");
 const client = new discord.Client();
@@ -19,13 +22,12 @@ const react = require('./commands/react.js');
 const status = require('./commands/status.js');
 
 function log(message) {
-    let date = (new Date()).toString().replace(" GMT+0000 (UTC)", "");
+    let date = (new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''));
     console.log("[" + date + "] " + message);
     fs.appendFile("bot.log", "[" + date + "] " + message + "\n", function (error) {if (error) throw error;});
 }
+fs.appendFile("bot.log", lmsg + "\n", function (error) {if (error) throw error;});
 
-log("Starting " + config.settings.bot_name  + "..");
-var loadstart = new Date();
 client.on('ready', () => {
     log("Bot running! (Took: " + ((new Date()).getTime() - loadstart.getTime()) + " ms)");
     client.user.setGame('.pomoc');

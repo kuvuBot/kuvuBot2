@@ -48,6 +48,7 @@ lang.pl_PL = {
             'motd': 'MOTD',
 
             'mojang_status': 'Status serwerów Mojang',
+            'server_offline': 'ten serwer jest offline!',
 
             'footer': '{0}, status powered by api.kuvus.pl'
         },

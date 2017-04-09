@@ -70,7 +70,7 @@ status.get = function (message) {
                                 .addField('➭ ' + lang.pl_PL.commands.status.motd + ': ', json.description)
                             message.channel.sendEmbed(embed, {disableEveryone: true});
                         } else {
-
+                            message.reply(lang.pl_PL.commands.status.server_offline);
                         }
                     });
                 });

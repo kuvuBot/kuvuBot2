@@ -51,8 +51,8 @@ client.on('message', message => {
         server = "Private Message";
     }
 
-    if (message.content.startsWith('<@!' + client.user.id + '>')) {
-        let msg = message.content.replace('<@!' + client.user.id + '>', '@bot');
+    if (message.content.startsWith('<@!' + client.user.id + '>') || message.content.startsWith('<@' + client.user.id + '>')) {
+        let msg = message.content.replace('<@!' + client.user.id + '>', '@bot').replace('<@' + client.user.id + '>', '@bot');
         log(`[${server}] ${message.author.username} text: ${msg}`);
     } else {
         if (server == "Private Message") {
@@ -68,9 +68,9 @@ client.on('message', message => {
         }
     }
 
-    if (message.content.startsWith('<@!' + client.user.id + '>') || !message.content.startsWith(".") && server == "Private Message") {
+    if (message.content.startsWith('<@!' + client.user.id + '>') || message.content.startsWith('<@' + client.user.id + '>') || !message.content.startsWith(".") && server == "Private Message") {
         try {
-            let question = message.content.replace('<@!' + client.user.id + '> ', '');
+            let question = message.content.replace('<@!' + client.user.id + '> ', '').replace('<@' + client.user.id + '>', '@bot');
             let bot = new cleverbot({key: config.keys.cleverbot});
 
             bot.query(question).then(function (response) {

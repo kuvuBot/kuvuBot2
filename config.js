@@ -1,15 +1,15 @@
 var config = {};
 
 config.keys = {
-    "discord": "MzAwMjQwNDgwMDIzODcxNDg4.C8pkRQ.WhlDlsSjjHU2WnBp_w9DcWOS57E",
-    "cleverbot": "CC1lzYE8WazejNBQ-H_bYwpwSWA"
+    "discord": "YOUR_DISCORD_TOKEN",
+    "cleverbot": "YOUR_CLEVERBOT_TOKEN"
 };
 
 config.settings = {
     'bot_name': 'kuvuBot',
     'bot_thumbnail': 'https://cdn.discordapp.com/app-icons/205965155282976768/ea38f145269800017987c7252fd2b21a.png',
-    'bot_github': 'https://github.com/kuvus/kuvuBot',
-    'bot_invite_url': 'https://discordapp.com/oauth2/authorize?&client_id=205965155282976768&scope=bot&permissions=268561430',
+    'bot_github': 'https://github.com/kuvuBot/kuvuBot2',
+    'bot_invite_url': 'https://discordapp.com/oauth2/authorize?&client_id=205965155282976768&scope=bot&permissions=8',
 
     'color': {
         'default': '#2196f3',

@@ -1,5 +1,6 @@
 const discord = require('discord.js');
-const lang = require('../lang.js');
+const lang = require('../inc/lang.js');
+const logger = require('../basic/logger.js');
 
 var rawtext = {};
 
@@ -24,7 +25,7 @@ rawtext.send = function (message) {
         }
     } catch (e) {
         message.reply("error!");
-        console.log(e);
+        logger.log(e);
     } finally {
         message.channel.stopTyping(true);
     }

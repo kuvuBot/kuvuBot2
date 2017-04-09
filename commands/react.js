@@ -1,5 +1,6 @@
 const discord = require('discord.js');
-const lang = require('../lang.js');
+const lang = require('../inc/lang.js');
+const logger = require('../basic/logger.js');
 
 function toEmoji(string) {
     let result = [];
@@ -40,7 +41,7 @@ react.react = function (message) {
         react(0);
     } catch (e) {
         message.reply("error!");
-        console.log(e);
+        logger.log(e);
     }
 }
 

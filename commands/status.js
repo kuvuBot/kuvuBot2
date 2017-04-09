@@ -1,8 +1,9 @@
 const discord = require('discord.js');
 const https = require('https');
 const http = require('http');
-const config = require('../config.js');
-const lang = require('../lang.js');
+const config = require('../inc/config.js');
+const lang = require('../inc/lang.js');
+const logger = require('../basic/logger.js');
 
 function pushMojangStatus(message, callback) {
     let options = {
@@ -43,12 +44,7 @@ function pushServerStatus(message, ip, callback) {
         });
         response.on('end', function () {
             let json = JSON.parse(reply);
-            if (json.online == true) {
-                var status = lang.pl_PL.commands.status.on;
-            } else {
-                var status = lang.pl_PL.commands.status.off;
-            }
-            if (json.online != false) {
+            if (json.online) {
                 const embed = new discord.RichEmbed()
                     .setTitle(config.settings.bot_name)
                     .setColor(config.settings.color.default)
@@ -56,7 +52,7 @@ function pushServerStatus(message, ip, callback) {
                     .setThumbnail(config.settings.bot_thumbnail)
                     .setURL(config.settings.website)
                     .addField('' + lang.pl_PL.commands.status.status + ':', json.address)
-                    .addField('➭ ' + lang.pl_PL.commands.status.status + ': ', status)
+                    .addField('➭ ' + lang.pl_PL.commands.status.status + ': ', lang.pl_PL.commands.status.on)
                     .addField('➭ ' + lang.pl_PL.commands.status.ping + ': ', parseInt(json.latency) + ' ms')
                     .addField('➭ ' + lang.pl_PL.commands.status.players + ': ', json.players.online + '/' + json.players.max)
                     .addField('➭ ' + lang.pl_PL.commands.status.version + ': ', json.version.name)
@@ -94,7 +90,7 @@ status.get = function (message) {
         }
     } catch (e) {
         message.reply("error!");
-        console.log(e);
+        logger.log(e);
     } finally {
         message.channel.stopTyping(true);
     }

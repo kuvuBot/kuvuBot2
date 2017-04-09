@@ -1,5 +1,6 @@
 const discord = require('discord.js');
-const lang = require('../lang.js');
+const lang = require('../inc/lang.js');
+const logger = require('../basic/logger.js');
 
 function toEmoji(string) {
     let result = [];
@@ -33,7 +34,7 @@ text.send = function (message) {
         message.channel.sendMessage(reply);
     } catch (e) {
         message.reply("error!");
-        console.log(e);
+        logger.log(e);
     } finally {
         message.channel.stopTyping(true);
     }

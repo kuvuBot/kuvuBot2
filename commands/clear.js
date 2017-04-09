@@ -1,5 +1,6 @@
 const discord = require('discord.js');
-const lang = require('../lang.js');
+const lang = require('../inc/lang.js');
+const logger = require('../basic/logger.js');
 
 var clear = {};
 
@@ -13,7 +14,7 @@ clear.purge = function (message) {
         }
     } catch (e) {
         message.reply("error!");
-        console.log(e);
+        logger.log(e);
     }
 }
 module.exports = clear;

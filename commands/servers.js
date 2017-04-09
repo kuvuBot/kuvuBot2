@@ -1,5 +1,6 @@
 const discord = require('discord.js');
-const lang = require('../lang.js');
+const lang = require('../inc/lang.js');
+const logger = require('../basic/logger.js');
 
 var servers = {};
 
@@ -10,7 +11,7 @@ servers.broadcast = function (message, client) {
         message.reply(msg);
     } catch (e) {
         message.reply("error!");
-        console.log(e);
+        logger.log(e);
     } finally {
         message.channel.stopTyping(true);
     }

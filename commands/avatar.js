@@ -1,6 +1,7 @@
 const discord = require('discord.js');
-const config = require('../config.js');
-const lang = require('../lang.js');
+const config = require('../inc/config.js');
+const lang = require('../inc/lang.js');
+const logger = require('../basic/logger.js');
 
 function pushAvatar(user, message) {
     const embed = new discord.RichEmbed()
@@ -41,7 +42,7 @@ avatar.find = function (message, log) {
         }
     } catch (e) {
         message.reply("error!");
-        console.log(e);
+        logger.log(e);
     } finally {
         message.channel.stopTyping(true);
     }

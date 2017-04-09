@@ -1,8 +1,9 @@
 const discord = require('discord.js');
 const https = require('https');
 const querystring = require('querystring');
-const config = require('../config.js');
-const lang = require('../lang.js');
+const config = require('../inc/config.js');
+const lang = require('../inc/lang.js');
+const logger = require('../basic/logger.js');
 
 function getIllegalImage(text, callback) {
     let options = {
@@ -94,7 +95,7 @@ isillegal.msg = function (message) {
         }
     } catch (e) {
         message.reply("error!");
-        console.log(e);
+        logger.log(e);
     } finally {
         message.channel.stopTyping(true);
     }

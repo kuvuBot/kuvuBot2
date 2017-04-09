@@ -1,6 +1,7 @@
 const discord = require('discord.js');
-const config = require('../config.js');
-const lang = require('../lang.js');
+const config = require('../inc/config.js');
+const lang = require('../inc/lang.js');
+const logger = require('../basic/logger.js');
 
 var help = {};
 
@@ -31,7 +32,7 @@ help.send = function (message) {
         message.reply(lang.pl_PL.commands.help.list_sent);
     } catch (e) {
         message.reply("error!");
-        console.log(e);
+        logger.log(e);
     }
 }
 module.exports = help;

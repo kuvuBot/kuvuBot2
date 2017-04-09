@@ -2,14 +2,15 @@ let lmsg = "[" + (new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
 let loadstart = new Date();
 var running = false;
 
+const logger = require('./basic/logger.js');
 const discord = require('discord.js');
 const fs = require("fs");
 const client = new discord.Client();
 const http = require('http');
 const cleverbot = require('cleverbot');
 
-const config = require('./config.js');
-const lang = require('./lang.js');
+const config = require('./inc/config.js');
+const lang = require('./inc/lang.js');
 
 const avatar = require('./commands/avatar.js');
 const cat = require('./commands/cat.js');
@@ -23,20 +24,16 @@ const react = require('./commands/react.js');
 const status = require('./commands/status.js');
 const clear = require('./commands/clear.js');
 
-function log(message) {
-    let date = (new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''));
-    console.log("[" + date + "] " + message);
-    fs.appendFile("bot.log", "[" + date + "] " + message + "\n", function (error) {if (error) throw error;});
-}
+
 fs.appendFile("bot.log", lmsg + "\n", function (error) {if (error) throw error;});
 
 client.on('ready', () => {
 
     client.user.setGame('.pomoc');
-    client.user.setAvatar('./avatar.png');
+    client.user.setAvatar('./resources/avatar.png');
 
     if (running == false) {
-        log("Bot running! (Took: " + ((new Date()).getTime() - loadstart.getTime()) + " ms)");
+        logger.log("Bot running! (Took: " + ((new Date()).getTime() - loadstart.getTime()) + " ms)");
         running = true;
     }
 });
@@ -53,17 +50,17 @@ client.on('message', message => {
 
     if (message.content.startsWith('<@!' + client.user.id + '>') || message.content.startsWith('<@' + client.user.id + '>')) {
         let msg = message.content.replace('<@!' + client.user.id + '>', '@bot').replace('<@' + client.user.id + '>', '@bot');
-        log(`[${server}] ${message.author.username} text: ${msg}`);
+        logger.log(`[${server}] ${message.author.username} text: ${msg}`);
     } else {
         if (server == "Private Message") {
             if (message.content.startsWith(".")) {
-                log(`[${server}] ${message.author.username} issued bot command: ${message.content}`);
+                logger.log(`[${server}] ${message.author.username} issued bot command: ${message.content}`);
             } else {
-                log(`[${server}] ${message.author.username} text: ${message.content}`);
+                logger.log(`[${server}] ${message.author.username} text: ${message.content}`);
             }
         } else {
             if (message.content.startsWith(".")) {
-                log(`[${server}] ${message.author.username} issued bot command: ${message.content}`);
+                logger.log(`[${server}] ${message.author.username} issued bot command: ${message.content}`);
             }
         }
     }
@@ -86,7 +83,7 @@ client.on('message', message => {
             message.channel.stopTyping(true);
         } catch (e) {
             message.reply("sorry but I can't resolve your message. My systems not working correctly..");
-            console.log(e);
+            logger.log(e);
         }
 
     } else {

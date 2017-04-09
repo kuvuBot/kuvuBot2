@@ -1,8 +1,8 @@
 var config = {};
 
 config.keys = {
-    "discord": "MzAwMjQwNDgwMDIzODcxNDg4.C8rnQw.MHEJHC4YGOKCwOQ64II4JScDnUM",
-    "cleverbot": "CC1lzYE8WazejNBQ-H_bYwpwSWA"
+    "discord": "DISCORD_BOT_TOKEN",
+    "cleverbot": "CLEVERBOT_API_KEY"
 };
 
 config.settings = {

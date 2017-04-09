@@ -30,51 +30,56 @@ function pushMojangStatus(message) {
 var status = {};
 
 status.get = function (message) {
-    let args = message.content.split(" ").slice(1);
-    if (args[0] != undefined) {
-        let arg = args[0].toLowerCase();
-        if (arg == 'mojang') {
-            pushMojangStatus(message);
+    try {
+        let args = message.content.split(" ").slice(1);
+        if (args[0] != undefined) {
+            let arg = args[0].toLowerCase();
+            if (arg == 'mojang') {
+                pushMojangStatus(message);
+            } else {
+                let options = {
+                    host: 'api.kuvus.pl',
+                    port: 80,
+                    path: '/srv.php?s=' + encodeURIComponent(arg)
+                };
+
+                http.get(options).on('response', function (response) {
+                    let reply = '';
+                    response.on('data', function (chunk) {
+                        reply += chunk;
+                    });
+                    response.on('end', function () {
+                        let json = JSON.parse(reply);
+                        if (json.online == true) {
+                            var status = lang.pl_PL.commands.status.on;
+                        } else {
+                            var status = lang.pl_PL.commands.status.off;
+                        }
+                        if (json.online != false) {
+                            const embed = new discord.RichEmbed()
+                                .setTitle(config.settings.bot_name)
+                                .setColor(config.settings.color.default)
+                                .setFooter((lang.pl_PL.commands.status.footer).replace('{0}', config.settings.footer))
+                                .setURL(config.settings.website)
+                                .addField('' + lang.pl_PL.commands.status.status + ':', json.address)
+                                .addField('➭ ' + lang.pl_PL.commands.status.status + ': ', status)
+                                .addField('➭ ' + lang.pl_PL.commands.status.ping + ': ', parseInt(json.latency) + ' ms')
+                                .addField('➭ ' + lang.pl_PL.commands.status.players + ': ', json.players.online + '/' + json.players.max)
+                                .addField('➭ ' + lang.pl_PL.commands.status.version + ': ', json.version.name)
+                                .addField('➭ ' + lang.pl_PL.commands.status.motd + ': ', json.description)
+                            message.channel.sendEmbed(embed, {disableEveryone: true});
+                        } else {
+
+                        }
+                    });
+                });
+            }
         } else {
-            let options = {
-                host: 'api.kuvus.pl',
-                port: 80,
-                path: '/srv.php?s=' + encodeURIComponent(arg)
-            };
-
-            http.get(options).on('response', function (response) {
-                let reply = '';
-                response.on('data', function (chunk) {
-                    reply += chunk;
-                });
-                response.on('end', function () {
-                    let json = JSON.parse(reply);
-                    if (json.online == true) {
-                        var status = lang.pl_PL.commands.status.on;
-                    } else {
-                        var status = lang.pl_PL.commands.status.off;
-                    }
-                    if (json.online != false) {
-                        const embed = new discord.RichEmbed()
-                            .setTitle(config.settings.bot_name)
-                            .setColor(config.settings.color.default)
-                            .setFooter((lang.pl_PL.commands.status.footer).replace('{0}', config.settings.footer))
-                            .setURL(config.settings.website)
-                            .addField('' + lang.pl_PL.commands.status.status + ':', json.address)
-                            .addField('➭ ' + lang.pl_PL.commands.status.status + ': ', status)
-                            .addField('➭ ' + lang.pl_PL.commands.status.ping + ': ', parseInt(json.latency) + ' ms')
-                            .addField('➭ ' + lang.pl_PL.commands.status.players + ': ', json.players.online + '/' + json.players.max)
-                            .addField('➭ ' + lang.pl_PL.commands.status.version + ': ', json.version.name)
-                            .addField('➭ ' + lang.pl_PL.commands.status.motd + ': ', json.description)
-                        message.channel.sendEmbed(embed, {disableEveryone: true});
-                    } else {
-
-                    }
-                });
-            });
+            message.channel.sendMessage(`<@${message.author.id}> ⚠️ **` + lang.pl_PL.valid_usage + `**: \`.status <mojang/ip>\``);
         }
-    } else {
-        message.channel.sendMessage(`<@${message.author.id}> ⚠️ **` + lang.pl_PL.valid_usage + `**: \`.status <mojang/ip>\``);
+    } catch (e) {
+        message.reply("error!");
+        console.log(e);
     }
 }
 

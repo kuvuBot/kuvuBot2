@@ -1,5 +1,6 @@
 let lmsg = "[" + (new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')) + "] Starting kuvuBot2.."; console.log(lmsg);
 let loadstart = new Date();
+var running = false;
 
 const discord = require('discord.js');
 const fs = require("fs");
@@ -20,6 +21,7 @@ const rawtext = require('./commands/rawtext.js');
 const servers = require('./commands/servers.js');
 const react = require('./commands/react.js');
 const status = require('./commands/status.js');
+const clear = require('./commands/clear.js');
 
 function log(message) {
     let date = (new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''));
@@ -29,9 +31,14 @@ function log(message) {
 fs.appendFile("bot.log", lmsg + "\n", function (error) {if (error) throw error;});
 
 client.on('ready', () => {
-    log("Bot running! (Took: " + ((new Date()).getTime() - loadstart.getTime()) + " ms)");
+
     client.user.setGame('.pomoc');
     client.user.setAvatar('./avatar.png');
+
+    if (running == false) {
+        log("Bot running! (Took: " + ((new Date()).getTime() - loadstart.getTime()) + " ms)");
+        running = true;
+    }
 });
 
 client.on('message', message => {
@@ -62,12 +69,23 @@ client.on('message', message => {
     }
 
     if (message.content.startsWith('<@!' + client.user.id + '>') || !message.content.startsWith(".") && server == "Private Message") {
-        let question = message.content.replace('<@!' + client.user.id + '> ', '');
+        try {
+            let question = message.content.replace('<@!' + client.user.id + '> ', '');
+            let bot = new cleverbot({key: config.keys.cleverbot});
 
-        let bot = new cleverbot({key: config.keys.cleverbot});
-        bot.query(question).then(function (response) {
-            message.reply(response.output);
-        });
+            bot.query(question).then(function (response) {
+                message.reply(response.output);
+            }).catch(function (error) {
+                emsg = "sorry but I can't resolve your message. My systems not working correctly..";
+                if (error == "Error: Cleverbot API key not valid") {
+                    emsg += " (Invalid API key)";
+                }
+                message.reply(emsg);
+            });
+        } catch (e) {
+            message.reply("sorry but I can't resolve your message. My systems not working correctly..");
+            console.log(e);
+        }
 
     } else {
         let args = message.content.toLowerCase().split(' ');
@@ -125,6 +143,10 @@ client.on('message', message => {
             case '.cat':
             case lang.pl_PL.aliases.cat:
                 cat.msg(message);
+                break;
+
+            case '.clear':
+                clear.purge(message);
                 break;
         }
     }

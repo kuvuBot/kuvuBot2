@@ -4,6 +4,11 @@ const lang = require('../lang.js');
 var ping = {};
 
 ping.reply = function (message) {
-    message.reply(lang.pl_PL.commands.ping.reply)
+    try {
+        message.reply(lang.pl_PL.commands.ping.reply)
+    } catch (e) {
+        message.reply("error!");
+        console.log(e);
+    }
 }
 module.exports = ping;

@@ -32,19 +32,24 @@ function pushRandomCat(type, message) {
 var cat = {};
 
 cat.msg = function (message, log) {
-    let args = message.content.split(" ").slice(1);
-    let category1 = args[0];
-    var category;
-    if (category1 != undefined) {
-        category = category1.toLowerCase();
-    }
+    try {
+        let args = message.content.split(" ").slice(1);
+        let category1 = args[0];
+        var category;
+        if (category1 != undefined) {
+            category = category1.toLowerCase();
+        }
 
-    switch (category) {
-        case 'gif':
-            pushRandomCat('gif', message);
-            break;
-        default:
-            pushRandomCat('image', message);
+        switch (category) {
+            case 'gif':
+                pushRandomCat('gif', message);
+                break;
+            default:
+                pushRandomCat('image', message);
+        }
+    } catch (e) {
+        message.reply("error!");
+        console.log(e);
     }
 }
 module.exports = cat;

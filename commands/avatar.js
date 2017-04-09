@@ -16,26 +16,31 @@ function pushAvatar(user, message) {
 var avatar = {};
 
 avatar.find = function (message, log) {
-    let users = message.mentions.users;
-    if (users.first()) {
-        let result = '';
-        users.forEach(function (user) {
-            if (user.avatarURL == null) {
-                if (user == message.author) {
-                    message.reply(lang.pl_PL.commands.avatar.not_set);
+    try {
+        let users = message.mentions.users;
+        if (users.first()) {
+            let result = '';
+            users.forEach(function (user) {
+                if (user.avatarURL == null) {
+                    if (user == message.author) {
+                        message.reply(lang.pl_PL.commands.avatar.not_set);
+                    } else {
+                        message.reply((lang.pl_PL.commands.avatar.not_found).replace("{0}", user));
+                    }
                 } else {
-                    message.reply((lang.pl_PL.commands.avatar.not_found).replace("{0}", user));
+                    pushAvatar(user, message);
                 }
-            } else {
-                pushAvatar(user, message);
-            }
-        });
-    } else {
-        if (message.author.avatarURL == null) {
-            message.reply(lang.pl_PL.commands.avatar.not_set);
+            });
         } else {
-            pushAvatar(message.author, message);
+            if (message.author.avatarURL == null) {
+                message.reply(lang.pl_PL.commands.avatar.not_set);
+            } else {
+                pushAvatar(message.author, message);
+            }
         }
+    } catch (e) {
+        message.reply("error!");
+        console.log(e);
     }
 }
 module.exports = avatar;

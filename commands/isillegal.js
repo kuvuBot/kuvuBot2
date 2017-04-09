@@ -66,29 +66,34 @@ function createIllegalImage(text, callback) {
 var isillegal = {};
 
 isillegal.msg = function (message) {
-    let args = message.content.split(" ");
-    let text = message.content.replace(args[0] + " ", "");
-    if (args[1] != undefined && text.length > 0) {
-        if (text.length > 10) {
-            message.reply(lang.pl_PL.commands.isillegal.too_long);
+    try {
+        let args = message.content.split(" ");
+        let text = message.content.replace(args[0] + " ", "");
+        if (args[1] != undefined && text.length > 0) {
+            if (text.length > 10) {
+                message.reply(lang.pl_PL.commands.isillegal.too_long);
+            } else {
+                createIllegalImage(text, function (result) {
+                    if (result == "error") {
+                        message.reply(lang.pl_PL.isillegal.error)
+                    } else {
+                        const embed = new discord.RichEmbed()
+                            .setTitle(config.settings.bot_name)
+                            .setColor(config.settings.color.default)
+                            .setDescription(text + lang.pl_PL.commands.isillegal.description)
+                            .setFooter(config.settings.footer)
+                            .setURL(config.settings.website)
+                            .setImage(result)
+                        message.channel.sendEmbed(embed, {disableEveryone: true});
+                    }
+                });
+            }
         } else {
-            createIllegalImage(text, function (result) {
-                if (result == "error") {
-                    message.reply(lang.pl_PL.isillegal.error)
-                } else {
-                    const embed = new discord.RichEmbed()
-                        .setTitle(config.settings.bot_name)
-                        .setColor(config.settings.color.default)
-                        .setDescription(text + lang.pl_PL.commands.isillegal.description)
-                        .setFooter(config.settings.footer)
-                        .setURL(config.settings.website)
-                        .setImage(result)
-                    message.channel.sendEmbed(embed, {disableEveryone: true});
-                }
-            });
+            message.channel.sendMessage(`<@${message.author.id}> ⚠️ **` + lang.pl_PL.valid_usage + `**: \`.isillegal <text>\``);
         }
-    } else {
-        message.channel.sendMessage(`<@${message.author.id}> ⚠️ **` + lang.pl_PL.valid_usage + `**: \`.isillegal <text>\``);
+    } catch (e) {
+        message.reply("error!");
+        console.log(e);
     }
 }
 module.exports = isillegal;

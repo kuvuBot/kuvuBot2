@@ -19,16 +19,21 @@ function toEmoji(string) {
 var text = {};
 
 text.send = function (message) {
-    let reply = '';
-    let splitted = message.content.split(' ');
-    if (splitted.length == 1) {
-        message.channel.sendMessage(`<@${message.author.id}> ⚠️ **` + lang.pl_PL.valid_usage + `**: \`.text <` + lang.pl_PL.commands.help.arguments.text + `>\``);
-    } else {
-        for (let i = 1; i < splitted.length; i++) {
-            reply += toEmoji(splitted[i]).join(' ') + '   ';
+    try {
+        let reply = '';
+        let splitted = message.content.split(' ');
+        if (splitted.length == 1) {
+            message.channel.sendMessage(`<@${message.author.id}> ⚠️ **` + lang.pl_PL.valid_usage + `**: \`.text <` + lang.pl_PL.commands.help.arguments.text + `>\``);
+        } else {
+            for (let i = 1; i < splitted.length; i++) {
+                reply += toEmoji(splitted[i]).join(' ') + '   ';
+            }
         }
+        message.channel.sendMessage(reply);
+    } catch (e) {
+        message.reply("error!");
+        console.log(e);
     }
-    message.channel.sendMessage(reply);
 }
 
 module.exports = text;

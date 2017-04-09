@@ -70,6 +70,7 @@ client.on('message', message => {
 
     if (message.content.startsWith('<@!' + client.user.id + '>') || message.content.startsWith('<@' + client.user.id + '>') || !message.content.startsWith(".") && server == "Private Message") {
         try {
+            message.channel.startTyping();
             let question = message.content.replace('<@!' + client.user.id + '> ', '').replace('<@' + client.user.id + '>', '@bot');
             let bot = new cleverbot({key: config.keys.cleverbot});
 
@@ -82,6 +83,7 @@ client.on('message', message => {
                 }
                 message.reply(emsg);
             });
+            message.channel.stopTyping(true);
         } catch (e) {
             message.reply("sorry but I can't resolve your message. My systems not working correctly..");
             console.log(e);

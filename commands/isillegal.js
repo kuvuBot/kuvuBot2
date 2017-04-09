@@ -67,6 +67,7 @@ var isillegal = {};
 
 isillegal.msg = function (message) {
     try {
+        message.channel.startTyping();
         let args = message.content.split(" ");
         let text = message.content.replace(args[0] + " ", "");
         if (args[1] != undefined && text.length > 0) {
@@ -94,6 +95,8 @@ isillegal.msg = function (message) {
     } catch (e) {
         message.reply("error!");
         console.log(e);
+    } finally {
+        message.channel.stopTyping(true);
     }
 }
 module.exports = isillegal;

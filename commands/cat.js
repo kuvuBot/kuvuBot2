@@ -33,6 +33,7 @@ var cat = {};
 
 cat.msg = function (message, log) {
     try {
+        message.channel.startTyping();
         let args = message.content.split(" ").slice(1);
         let category1 = args[0];
         var category;
@@ -50,6 +51,8 @@ cat.msg = function (message, log) {
     } catch (e) {
         message.reply("error!");
         console.log(e);
+    } finally {
+        message.channel.stopTyping(true);
     }
 }
 module.exports = cat;

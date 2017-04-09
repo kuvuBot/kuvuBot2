@@ -20,6 +20,7 @@ var text = {};
 
 text.send = function (message) {
     try {
+        message.channel.startTyping();
         let reply = '';
         let splitted = message.content.split(' ');
         if (splitted.length == 1) {
@@ -33,6 +34,8 @@ text.send = function (message) {
     } catch (e) {
         message.reply("error!");
         console.log(e);
+    } finally {
+        message.channel.stopTyping(true);
     }
 }
 

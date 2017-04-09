@@ -31,6 +31,7 @@ var status = {};
 
 status.get = function (message) {
     try {
+        message.channel.startTyping();
         let args = message.content.split(" ").slice(1);
         if (args[0] != undefined) {
             let arg = args[0].toLowerCase();
@@ -80,6 +81,8 @@ status.get = function (message) {
     } catch (e) {
         message.reply("error!");
         console.log(e);
+    } finally {
+        message.channel.stopTyping(true);
     }
 }
 

@@ -3,6 +3,9 @@ logs
 *.log
 npm-debug.log*
 
+# version file
+version.txt
+
 # kuvuBot keys file
 keys.js
 

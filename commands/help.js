@@ -1,14 +1,20 @@
 const discord = require('discord.js');
+const path = require('path');
+const fs = require('fs');
 const config = require('../inc/config.js');
 const lang = require('../inc/lang.js');
 const logger = require('../basic/logger.js');
 
 var help = {};
 
+fs.readFile(path.dirname(process.mainModule.filename) + "/version.txt", 'utf8', function (error, data) {if (error) {return logger.log(error); }
+    global.bot_version = data;
+});
+
 help.send = function (message) {
     try {
         const embed = new discord.RichEmbed()
-            .setTitle(config.settings.bot_name)
+            .setTitle(`${config.settings.bot_name} ${global.bot_version}`)
             .setColor(config.settings.color.default)
             .setFooter(config.settings.footer)
             .setThumbnail(config.settings.bot_thumbnail)

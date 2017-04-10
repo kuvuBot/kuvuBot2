@@ -30,7 +30,7 @@ fs.appendFile("bot.log", lmsg + "\n", function (error) {if (error) throw error;}
 
 client.on('ready', () => {
 
-    client.user.setGame('PhpStorm 2016.3.2');
+    client.user.setGame('.pomoc');
     client.user.setAvatar('./resources/avatar.png');
 
     if (running == false) {

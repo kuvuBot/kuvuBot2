@@ -6,8 +6,9 @@ npm-debug.log*
 # version file
 version.txt
 
-# kuvuBot keys file
-keys.js
+# kuvuBot specific files
+inc/keys.js
+inc/config.js
 
 # Runtime data
 pids

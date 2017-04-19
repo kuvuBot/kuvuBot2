@@ -77,7 +77,7 @@ isillegal.msg = function (message) {
             } else {
                 createIllegalImage(text, function (result) {
                     if (result == "error") {
-                        message.reply(lang.pl_PL.isillegal.error)
+                        message.reply(lang.pl_PL.commands.isillegal.error)
                     } else {
                         const embed = new discord.RichEmbed()
                             .setTitle(config.settings.bot_name)

@@ -26,7 +26,7 @@ help.send = function (message) {
                 '[' + lang.pl_PL.aliases.rawtext + '](javascript:;) <' + lang.pl_PL.commands.help.arguments.text + '> - ' + lang.pl_PL.commands.help.rawtext + '\n' +
                 '[' + lang.pl_PL.aliases.avatar + '](javascript:;) [' + lang.pl_PL.commands.help.arguments.mention + '] - ' + lang.pl_PL.commands.help.avatar + '\n' +
                 '[' + lang.pl_PL.aliases.isillegal + '](javascript:;) <' + lang.pl_PL.commands.help.arguments.text + '> - ' + lang.pl_PL.commands.help.isillegal + '\n' +
-                '[' + lang.pl_PL.aliases.servers + '](javascript:;) - ' + (lang.pl_PL.commands.help.isillegal).replace('{0}', config.settings.bot_name) + '\n' +
+                '[' + lang.pl_PL.aliases.servers + '](javascript:;) - ' + (lang.pl_PL.commands.help.servers).replace('{0}', config.settings.bot_name) + '\n' +
                 '[' + lang.pl_PL.aliases.react + '](javascript:;) <' + lang.pl_PL.commands.help.arguments.text + '> - ' + lang.pl_PL.commands.help.react + '\n' +
                 '[' + lang.pl_PL.aliases.clever + '](javascript:;) <' + lang.pl_PL.commands.help.arguments.msg + '> - ' + lang.pl_PL.commands.help.cleverbot + '\n' +
                 '[' + lang.pl_PL.aliases.cat + '](javascript:;) - ' + lang.pl_PL.commands.help.cat + '\n' +

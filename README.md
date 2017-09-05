@@ -1,4 +1,4 @@
-# kuvuBot v2 (by Inuun)
+# kuvuBot v2
 [<img src="https://discordapp.com/api/guilds/257599205693063168/widget.png?style=shield">](https://discord.gg/KbUdeKe)
 ### Informations
 Official Web Site: https://bot.kuvus.pl <br>

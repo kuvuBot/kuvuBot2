@@ -31,6 +31,7 @@ help.send = function (message) {
                 '[' + lang.pl_PL.aliases.clever + '](javascript:;) <' + lang.pl_PL.commands.help.arguments.msg + '> - ' + lang.pl_PL.commands.help.cleverbot + '\n' +
                 '[' + lang.pl_PL.aliases.cat + '](javascript:;) - ' + lang.pl_PL.commands.help.cat + '\n' +
                 '[' + lang.pl_PL.aliases.figlet + '](javascript:;) - ' + lang.pl_PL.commands.help.figlet + '\n' +
+                '[' + lang.pl_PL.aliases.info + '](javascript:;) - ' + lang.pl_PL.commands.help.info + '\n' +
                 '[' + lang.pl_PL.aliases.status + '](javascript:;) <mojang/ip> - ' + lang.pl_PL.commands.help.status + '')
             .addField('🔗  ' + lang.pl_PL.commands.help.urls, 'WWW: [' + (config.settings.website).replace('http://', '').replace('https://', '') + '](' + config.settings.website + ')\n' +
                 'GitHub: ' + config.settings.bot_github + '\n\n' +

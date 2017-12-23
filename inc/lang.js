@@ -14,7 +14,8 @@ lang.pl_PL = {
         'clever': '.clever',
         'cat': '.kot',
         'status': '.status',
-        'figlet': '.figlet'
+        'figlet': '.figlet',
+        'info': '.info'
     },
 
     'commands': {
@@ -73,6 +74,7 @@ lang.pl_PL = {
             'cat': 'wysyła zdjęcie kotka :3',
             'figlet': 'zwraca tekst w postaci kresek',
             'status': 'wyświetla status serwerów',
+            'info': 'wyświetla informacje o serwerze',
 
             'list_sent': 'lista komend została wysłana na PW!'
         },

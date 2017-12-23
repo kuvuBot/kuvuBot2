@@ -1,31 +1,32 @@
 const discord = require('discord.js');
-const https = require('https');
+const http = require('http');
 const config = require('../inc/config.js');
 const lang = require('../inc/lang.js');
 const logger = require('../basic/logger.js');
 
-function pushRandomCat(type, message) {
+function pushRandomCat(message) {
     let options = {
-        host: 'api.kiciusie.pl',
-        port: 443,
-        path: '/index.php?type=get&mode=' + type
+        host: 'random.cat',
+        port: 80,
+        path: '/meow'
     };
 
-    https.get(options).on('response', function (response) {
+    http.get(options).on('response', function (response) {
         let reply = '';
         response.on('data', function (chunk) {
             reply += chunk;
         });
         response.on('end', function () {
             let json = JSON.parse(reply);
+            
             const embed = new discord.RichEmbed()
                 .setTitle(config.settings.bot_name)
                 .setColor(config.settings.color.pink)
                 .setDescription(lang.pl_PL.commands.cat.description)
                 .setFooter(config.settings.footer)
                 .setURL(config.settings.website)
-                .setImage(json.url)
-            message.channel.sendEmbed(embed, {disableEveryone: true});
+                .setImage(json.file)
+            message.channel.send(embed);
         });
     });
 }
@@ -35,20 +36,7 @@ var cat = {};
 cat.msg = function (message, log) {
     try {
         message.channel.startTyping();
-        let args = message.content.split(" ").slice(1);
-        let category1 = args[0];
-        var category;
-        if (category1 != undefined) {
-            category = category1.toLowerCase();
-        }
-
-        switch (category) {
-            case 'gif':
-                pushRandomCat('gif', message);
-                break;
-            default:
-                pushRandomCat('image', message);
-        }
+        pushRandomCat(message);
     } catch (e) {
         message.reply("error!");
         logger.log(e);

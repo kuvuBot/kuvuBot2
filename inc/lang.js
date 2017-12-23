@@ -27,7 +27,7 @@ lang.pl_PL = {
             'description': 'Losowy kotek!'
         },
         'ping': {
-            'reply': 'pong!'
+            'reply': '🏓 Pong!'
         },
         'servers': {
             'description': 'serwery, które używają kuvuBota'
@@ -38,7 +38,7 @@ lang.pl_PL = {
             'avatar': 'awatar {0}'
         },
         'status': {
-            'on': '💚 Włączony',
+            'on': '✅ Włączony',
 
             'server': 'Serwer',
             'status': 'Status',
@@ -51,7 +51,8 @@ lang.pl_PL = {
             'server_offline': 'ten serwer jest offline!'
         },
         'help': {
-            'commands': 'Komendy',
+            'commands': 'Komendy użytkownika',
+            'admincommands': 'Komendy administratora',
             'urls': 'Linki',
 
             'arguments': {

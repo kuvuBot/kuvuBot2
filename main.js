@@ -24,6 +24,7 @@ const react = require('./commands/react.js');
 const status = require('./commands/status.js');
 const clear = require('./commands/clear.js');
 const figlet = require('./commands/figlet.js');
+const info = require('./commands/info.js');
 
 
 fs.appendFile("bot.log", lmsg + "\n", function (error) {if (error) throw error;});
@@ -152,6 +153,9 @@ client.on('message', message => {
             case '.figlet':
             case lang.pl_PL.aliases.figlet:
                 figlet.send(message);
+                break;
+            case '.info':
+                info.msg(message);
                 break;
         }
     }

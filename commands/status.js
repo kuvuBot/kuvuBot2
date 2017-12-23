@@ -1,33 +1,39 @@
 const discord = require('discord.js');
 const https = require('https');
-const http = require('http');
 const config = require('../inc/config.js');
 const lang = require('../inc/lang.js');
 const logger = require('../basic/logger.js');
 
 function pushMojangStatus(message, callback) {
-    let options = {
-        host: 'api.kuvus.pl',
-        port: 80,
-        path: '/?t=status&s=mojang'
-    };
-    http.get(options).on('response', function (response) {
-        let reply = '';
-        response.on('data', function (chunk) {
-            reply += chunk;
+    try {
+        let options = {
+            host: 'bot.kuvus.pl',
+            port: 443,
+            path: '/api/mojang.php'
+        };
+
+        https.get(options).on('response', function (response) {
+            let reply = '';
+            response.on('data', function (chunk) {
+                reply += chunk;
+            });
+            response.on('end', function () {
+                const embed = new discord.RichEmbed()
+                    .setTitle(config.settings.bot_name)
+                    .setColor(config.settings.color.default)
+                    .setFooter(config.settings.footer)
+                    .setThumbnail(config.settings.bot_thumbnail)
+                    .setURL(config.settings.website)
+                    .addField(lang.pl_PL.commands.status.mojang_status + ': \n', reply)
+                message.channel.send(embed);
+                callback();
+            });
         });
-        response.on('end', function () {
-            const embed = new discord.RichEmbed()
-                .setTitle(config.settings.bot_name)
-                .setColor(config.settings.color.default)
-                .setFooter(config.settings.footer)
-                .setThumbnail(config.settings.bot_thumbnail)
-                .setURL(config.settings.website)
-                .addField(lang.pl_PL.commands.status.mojang_status + ': \n', reply)
-            message.channel.sendEmbed(embed, {disableEveryone: true});
-            callback();
-        });
-    });
+    }
+    catch (e) {
+        message.reply("error!");
+        logger.log(e);
+    }
 }
 
 function pushServerStatus(message, ip, callback) {
@@ -57,7 +63,7 @@ function pushServerStatus(message, ip, callback) {
                     .addField('➭ ' + lang.pl_PL.commands.status.players + ': ', json.players.online + '/' + json.players.max)
                     .addField('➭ ' + lang.pl_PL.commands.status.version + ': ', json.version.name)
                     .addField('➭ ' + lang.pl_PL.commands.status.motd + ': ', json.description)
-                message.channel.sendEmbed(embed, {disableEveryone: true});
+                message.channel.send(embed);
             } else {
                 message.reply(lang.pl_PL.commands.status.server_offline);
             }
@@ -86,7 +92,7 @@ status.get = function (message) {
                     });
             }
         } else {
-            message.channel.sendMessage(`<@${message.author.id}> ⚠️ **` + lang.pl_PL.valid_usage + `**: \`.status <mojang/ip>\``);
+            message.channel.send(`<@${message.author.id}> ⚠️ **` + lang.pl_PL.valid_usage + `**: \`.status <mojang/ip>\``);
         }
     } catch (e) {
         message.reply("error!");

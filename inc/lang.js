@@ -84,6 +84,17 @@ lang.pl_PL = {
         },
         'text': {
             'too_long': 'podaj krotszy tekst! (maks. 150 znakow)'
+        },
+        'info': {
+            'created': 'Stworzony',
+            'defaultChannel': 'Domyślny kanał',
+            'icon': 'Ikona',
+            'id': 'ID',
+            'memberCount': 'Liczba użytkowników',
+            'name': 'Nazwa',
+            'owner': 'Właściciel',
+            'region': 'Lokalizacja',
+            'pm': 'Ta komenda nie może być użyta w prywatnej wiadomości.'
         }
     },
 

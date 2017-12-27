@@ -1,11 +1,13 @@
 {
   "name": "kuvubot",
-  "version": "1.0.0",
+  "version": "2.3.1",
   "description": "Discord bot written in Node.js.",
   "main": "main.js",
   "dependencies": {
+    "bufferutil": "^3.0.0",
     "cleverbot": "^1.0.1",
-    "discord.js": "^11.0.0",
+    "connect": "^3.6.5",
+    "discord.js": "^11.2.1",
     "figlet": "^1.0.0"
   },
   "devDependencies": {},

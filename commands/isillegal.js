@@ -64,7 +64,7 @@ function createIllegalImage(text, callback) {
     request.end();
 }
 
-var isillegal = {};
+let isillegal = {};
 
 isillegal.msg = function (message) {
     try {

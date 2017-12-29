@@ -1,4 +1,4 @@
-var lang = {};
+let lang = {};
 
 lang.pl_PL = {
 

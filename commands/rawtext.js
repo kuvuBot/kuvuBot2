@@ -2,9 +2,9 @@ const discord = require('discord.js');
 const lang = require('../inc/lang.js');
 const logger = require('../basic/logger.js');
 
-var rawtext = {};
+let rawtext = {};
 
-rawtext.send = function (message) {
+rawtext.send = (message) => {
     try {
         message.channel.startTyping();
         let reply = '```';

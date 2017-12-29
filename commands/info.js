@@ -3,9 +3,9 @@ const config = require('../inc/config.js');
 const lang = require('../inc/lang.js');
 const logger = require('../basic/logger.js');
 
-var info = {};
+let info = {};
 
-info.msg = function (message, log) {
+info.msg = (message, log) => {
     try {
         var server;
         if (message.channel.type == "text") {

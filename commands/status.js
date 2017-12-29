@@ -72,7 +72,7 @@ function pushServerStatus(message, ip, callback) {
     });
 }
 
-var status = {};
+let status = {};
 
 status.get = function (message) {
     try {

@@ -14,17 +14,17 @@ function pushAvatar(user, message) {
     message.channel.sendEmbed(embed, {disableEveryone: true});
 }
 
-var avatar = {};
+let avatar = {};
 
-avatar.find = function (message, log) {
+avatar.find = (message, log) => {
     try {
         message.channel.startTyping();
         let users = message.mentions.users;
         if (users.first()) {
             let result = '';
             users.forEach(function (user) {
-                if (user.avatarURL == null) {
-                    if (user == message.author) {
+                if (user.avatarURL === null) {
+                    if (user === message.author) {
                         message.reply(lang.pl_PL.commands.avatar.not_set);
                     } else {
                         message.reply((lang.pl_PL.commands.avatar.not_found).replace("{0}", user));
@@ -34,7 +34,7 @@ avatar.find = function (message, log) {
                 }
             });
         } else {
-            if (message.author.avatarURL == null) {
+            if (message.author.avatarURL === null) {
                 message.reply(lang.pl_PL.commands.avatar.not_set);
             } else {
                 pushAvatar(message.author, message);

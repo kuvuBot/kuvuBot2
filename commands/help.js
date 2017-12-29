@@ -5,13 +5,13 @@ const config = require('../inc/config.js');
 const lang = require('../inc/lang.js');
 const logger = require('../basic/logger.js');
 
-var help = {};
+let help = {};
 
 fs.readFile(path.dirname(process.mainModule.filename) + "/version.txt", 'utf8', function (error, data) {if (error) {return logger.log(error); }
     global.bot_version = data;
 });
 
-help.send = function (message) {
+help.send = (message) => {
     try {
         const embed = new discord.RichEmbed()
             .setTitle(`${config.settings.bot_name} ${global.bot_version}`)

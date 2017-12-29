@@ -17,9 +17,9 @@ function toEmoji(string) {
     return result;
 }
 
-var react = {};
+let react = {};
 
-react.react = function (message) {
+react.react = (message) => {
     try {
         let splitted = message.content.split(' ');
         let emojis = [];

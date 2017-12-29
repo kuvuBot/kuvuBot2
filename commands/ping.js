@@ -2,9 +2,9 @@ const discord = require('discord.js');
 const lang = require('../inc/lang.js');
 const logger = require('../basic/logger.js');
 
-var ping = {};
+let ping = {};
 
-ping.reply = function (message) {
+ping.reply = (message) => {
     try {
         message.reply(lang.pl_PL.commands.ping.reply)
     } catch (e) {

@@ -54,7 +54,7 @@ client.on('message', message => {
         let msg = message.content.replace('<@!' + client.user.id + '>', '@bot').replace('<@' + client.user.id + '>', '@bot');
         logger.log(`[${server}] ${message.author.username} text: ${msg}`);
     } else {
-        if (server == "Private Message") {
+        if (server === "Private Message") {
             if (message.content.startsWith(".")) {
                 logger.log(`[${server}] ${message.author.username} issued bot command: ${message.content}`);
             } else {

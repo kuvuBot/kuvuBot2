@@ -2,9 +2,9 @@ const discord = require('discord.js');
 const lang = require('../inc/lang.js');
 const logger = require('../basic/logger.js');
 
-var clear = {};
+let clear = {};
 
-clear.purge = function (message) {
+clear.purge = (message) => {
     try {
         if (message.author.hasPermission("MANAGE_MESSAGES")) {
             message.channel.bulkDelete(100);

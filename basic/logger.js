@@ -1,9 +1,9 @@
 const path = require('path');
 const fs = require("fs");
 
-var logger = {};
+let logger = {};
 
-logger.log = function (message) {
+logger.log = (message) => {
     let prefix = "[" + (new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')) + "] ";
     try {
         console.log(prefix + message);

@@ -31,7 +31,7 @@ function pushRandomCat(message) {
     });
 }
 
-var cat = {};
+let cat = {};
 
 cat.msg = function (message, log) {
     try {

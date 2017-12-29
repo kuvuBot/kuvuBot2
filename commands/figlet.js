@@ -3,13 +3,13 @@ const figletModule = require('figlet');
 const lang = require('../inc/lang.js');
 const logger = require('../basic/logger.js');
 
-var figlet = {};
+let figlet = {};
 
-figlet.send = function (message) {
+figlet.send = (message) => {
     try {
         message.channel.startTyping();
         let splitted = message.content.split(' ');
-        if (splitted.length == 1) {
+        if (splitted.length === 1) {
             message.channel.sendMessage(`<@${message.author.id}> ⚠️ **` + lang.pl_PL.valid_usage + `**: \`.figlet <` + lang.pl_PL.commands.help.arguments.text + `>\``);
         } else {
             if (message.content.replace(splitted[0] + ' ', '').length < 33) {

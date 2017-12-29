@@ -17,9 +17,9 @@ function toEmoji(string) {
     return result;
 }
 
-var text = {};
+let text = {};
 
-text.send = function (message) {
+text.send =  (message) => {
     try {
         message.channel.startTyping();
         let reply = '';
